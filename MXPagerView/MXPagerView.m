@@ -369,6 +369,10 @@
     if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
         CGPoint velocity = [(UIPanGestureRecognizer*)gestureRecognizer velocityInView:self];
         
+        if ((_index == 0 && velocity.x > 0) || (_index == (_count - 1) && velocity.x < 0)) {
+            return NO;
+        }
+        
         //Lock vertical pan gesture.
         if (fabs(velocity.x) < fabs(velocity.y)) {
             return NO;
